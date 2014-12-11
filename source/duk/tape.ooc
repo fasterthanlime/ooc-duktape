@@ -14,13 +14,19 @@ DukContext: cover from duk_context* {
     pcall: extern(duk_pcall) func (nargs: Int) -> Int
 
     requireInt: extern(duk_require_int) func (index: Int) -> DukInt
+    requirePointer: extern(duk_require_pointer) func (index: Int) -> Pointer
+    requireNumber: extern(duk_require_number) func (index: Int) -> Double
 
     pushGlobalObject: extern(duk_push_global_object) func
+    pushObject: extern(duk_push_object) func -> Int
     pushString: extern(duk_push_string) func (val: CString)
     pushCFunction: extern(duk_push_c_function) func (p: Pointer, nargs: Int)
     pushFalse: extern(duk_push_false) func
     pushTrue: extern(duk_push_true) func
+    pushPointer: extern(duk_push_pointer) func (p: Pointer)
+    pushInt: extern(duk_push_int) func (val: DukInt)
 
+    putGlobalString: extern(duk_put_global_string) func (name: CString)
     putPropString: extern(duk_put_prop_string) func (index: Int, name: CString)
     getPropString: extern(duk_get_prop_string) func (index: Int, name: CString)
 
