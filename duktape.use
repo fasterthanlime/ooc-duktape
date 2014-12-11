@@ -1,0 +1,5 @@
+Name: duktape
+Version: 0.1
+Description: Bindings for Duktape JS engine
+SourcePath: source
+
