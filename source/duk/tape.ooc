@@ -1,5 +1,7 @@
 include ./duktape
 
+DukInt: cover from duk_int_t extends Int
+
 DukContext: cover from duk_context* {
 
     createHeapDefault: extern(duk_create_heap_default) static func -> This
@@ -11,10 +13,16 @@ DukContext: cover from duk_context* {
     /** @return 0 on success */
     pcall: extern(duk_pcall) func (nargs: Int) -> Int
 
+    requireInt: extern(duk_require_int) func (index: Int) -> DukInt
+
     pushGlobalObject: extern(duk_push_global_object) func
     pushString: extern(duk_push_string) func (val: CString)
+    pushCFunction: extern(duk_push_c_function) func (p: Pointer, nargs: Int)
+    pushFalse: extern(duk_push_false) func
+    pushTrue: extern(duk_push_true) func
 
-    getPropString: extern(duk_get_prop_string) func (index: Int, name: CString) -> CString
+    putPropString: extern(duk_put_prop_string) func (index: Int, name: CString)
+    getPropString: extern(duk_get_prop_string) func (index: Int, name: CString)
 
     pop: extern(duk_pop) func
 
