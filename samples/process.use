@@ -1,0 +1,3 @@
+Main: process
+SourcePath: .
+Requires: duktape
