@@ -24,7 +24,7 @@ DukContext: cover from duk_context* {
     pushFalse: extern(duk_push_false) func
     pushTrue: extern(duk_push_true) func
     pushPointer: extern(duk_push_pointer) func (p: Pointer)
-    pushInt: extern(duk_push_int) func (val: DukInt)
+    pushInt: extern(duk_push_int) func (val: Int)
     pushNumber: extern(duk_push_number) func (val: Double)
     pushThis: extern(duk_push_this) func
 
