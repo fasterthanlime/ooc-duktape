@@ -25,10 +25,18 @@ DukContext: cover from duk_context* {
     pushTrue: extern(duk_push_true) func
     pushPointer: extern(duk_push_pointer) func (p: Pointer)
     pushInt: extern(duk_push_int) func (val: DukInt)
+    pushNumber: extern(duk_push_number) func (val: Double)
+    pushThis: extern(duk_push_this) func
+
+    setPrototype: extern(duk_set_prototype) func (index: Int)
 
     putGlobalString: extern(duk_put_global_string) func (name: CString)
+    getGlobalString: extern(duk_get_global_string) func (name: CString)
+
     putPropString: extern(duk_put_prop_string) func (index: Int, name: CString)
     getPropString: extern(duk_get_prop_string) func (index: Int, name: CString)
+
+    isUndefined: extern(duk_is_undefined) func (index: Int) -> Bool
 
     pop: extern(duk_pop) func
 
