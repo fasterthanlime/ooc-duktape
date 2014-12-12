@@ -16,10 +16,14 @@ DukContext: cover from duk_context* {
     requireInt: extern(duk_require_int) func (index: Int) -> DukInt
     requirePointer: extern(duk_require_pointer) func (index: Int) -> Pointer
     requireNumber: extern(duk_require_number) func (index: Int) -> Double
+    requireString: extern(duk_require_string) func (index: Int) -> CString
+    requireBoolean: extern(duk_require_boolean) func (index: Int) -> Bool
+    requireObjectCoercible: extern(duk_require_object_coercible) func (index: Int)
 
     pushGlobalObject: extern(duk_push_global_object) func
     pushObject: extern(duk_push_object) func -> Int
     pushString: extern(duk_push_string) func (val: CString)
+    pushBoolean: extern(duk_push_boolean) func (val: Bool)
     pushCFunction: extern(duk_push_c_function) func (p: Pointer, nargs: Int)
     pushFalse: extern(duk_push_false) func
     pushTrue: extern(duk_push_true) func
@@ -39,6 +43,10 @@ DukContext: cover from duk_context* {
     isUndefined: extern(duk_is_undefined) func (index: Int) -> Bool
 
     pop: extern(duk_pop) func
+    pop2: extern(duk_pop_2) func
+    pop3: extern(duk_pop_3) func
+    popn: extern(duk_pop_n) func (howmany: Int)
+    dup: extern(duk_dup) func (index: Int)
 
     safeToString: extern(duk_safe_to_string) func (index: Int) -> CString
 
