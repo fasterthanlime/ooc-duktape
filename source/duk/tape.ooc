@@ -9,6 +9,7 @@ DukContext: cover from duk_context* {
 
     /** @return 0 on success */
     pevalFile: extern(duk_peval_file) func (CString) -> Int
+    pevalString: extern(duk_peval_string) func (CString) -> Int
 
     /** @return 0 on success */
     pcall: extern(duk_pcall) func (nargs: Int) -> Int
