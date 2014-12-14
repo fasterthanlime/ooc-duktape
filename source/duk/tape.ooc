@@ -2,9 +2,37 @@ include ./duktape
 
 DukInt: cover from duk_int_t extends Int
 
+duk_gc_malloc_shim: func (udata: Pointer, size: SizeT) {
+    gc_malloc(size)
+}
+
+duk_gc_realloc_shim: func (udata: Pointer, ptr: Pointer, size: SizeT) {
+    gc_realloc(ptr, size)
+}
+
+duk_gc_free_shim: func (udata: Pointer, ptr: Pointer) {
+    gc_free(ptr)
+}
+
 DukContext: cover from duk_context* {
 
     createHeapDefault: extern(duk_create_heap_default) static func -> This
+    createHeap: extern(duk_create_heap) static func(
+        alloc_func: Pointer,
+        realloc_func: Pointer,
+        free_func: Pointer,
+        alloc_udata: Pointer,
+        fatal_handler: Pointer) -> This
+
+    createHeapBoehmGC: static func -> This {
+        This createHeap(
+            duk_gc_malloc_shim,
+            duk_gc_realloc_shim,
+            duk_gc_free_shim,
+            null,
+            null)
+    }
+
     destroyHeap: extern(duk_destroy_heap) func
 
     /** @return 0 on success */
