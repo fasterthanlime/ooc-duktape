@@ -16,7 +16,7 @@ duk_gc_free_shim: func (udata: Pointer, ptr: Pointer) {
 
 DukException: class extends Exception {
     init: func (cause, trace: String) { 
-        msg := "[Duk]: #{cause}\n==== Trace ====\n\n#{trace}\n==== Trace end ===="
+        msg := "[Duk]: #{cause}\n======== Trace ========\n#{trace}\n======== Trace end ========="
         super(msg)
     }
 }
