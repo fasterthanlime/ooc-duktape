@@ -14,7 +14,22 @@ duk_gc_free_shim: func (udata: Pointer, ptr: Pointer) {
     gc_free(ptr)
 }
 
+DukException: class extends Exception {
+    init: func (cause, trace: String) { 
+        msg := "[Duk]: #{cause}\n==== Trace ====\n\n#{trace}\n==== Trace end ===="
+        super(msg)
+    }
+}
+
 DukContext: cover from duk_context* {
+
+    raise!: func {
+        getPropString(-1, "stack")
+        trace := safeToString(-1) as String
+        pop()
+        cause := safeToString(-1) as String
+        DukException new(cause, trace) throw()
+    }
 
     createHeapDefault: extern(duk_create_heap_default) static func -> This
     createHeap: extern(duk_create_heap) static func(
