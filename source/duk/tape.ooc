@@ -1,4 +1,4 @@
-include ./duktape | (DUK_OPT_NO_MARK_AND_SWEEP)
+include ./duktape | (DUK_OPT_NO_VOLUNTARY_GC)
 
 DukInt: cover from duk_int_t extends Int
 
