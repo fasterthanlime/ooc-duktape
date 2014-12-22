@@ -84,6 +84,9 @@ DukContext: cover from duk_context* {
     putPropString: extern(duk_put_prop_string) func (index: Int, name: CString)
     getPropString: extern(duk_get_prop_string) func (index: Int, name: CString)
 
+    putPropIndex: extern(duk_put_prop_index) func (objIndex: Int, arrIndex: Int)
+    getPropIndex: extern(duk_get_prop_index) func (objIndex: Int, arrIndex: Int)
+
     isUndefined: extern(duk_is_undefined) func (index: Int) -> Bool
 
     pop: extern(duk_pop) func
