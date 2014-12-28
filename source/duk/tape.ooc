@@ -88,6 +88,8 @@ DukContext: cover from duk_context* {
     getPropIndex: extern(duk_get_prop_index) func (objIndex: Int, arrIndex: Int)
 
     isUndefined: extern(duk_is_undefined) func (index: Int) -> Bool
+    isNull: extern(duk_is_null) func (index: Int) -> Bool
+    isNullOrUndefined: extern(duk_is_null_or_undefined) func (index: Int) -> Bool
 
     pop: extern(duk_pop) func
     pop2: extern(duk_pop_2) func
