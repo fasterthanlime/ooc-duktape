@@ -21,6 +21,29 @@ DukException: class extends Exception {
     }
 }
 
+PropFlags: enum from Int {
+    /// set writable (effective if DUK_DEFPROP_HAVE_WRITABLE set)
+    WRITABLE: extern(DUK_DEFPROP_WRITABLE),
+    /// set enumerable (effective if DUK_DEFPROP_HAVE_ENUMERABLE set)
+    ENUMERABLE: extern(DUK_DEFPROP_ENUMERABLE),
+    /// set configurable (effective if DUK_DEFPROP_HAVE_CONFIGURABLE set)
+    CONFIGURABLE: extern(DUK_DEFPROP_CONFIGURABLE),
+    /// set/clear writable 
+    HAVE_WRITABLE: extern(DUK_DEFPROP_HAVE_WRITABLE),
+    /// set/clear enumerable
+    HAVE_ENUMERABLE: extern(DUK_DEFPROP_HAVE_ENUMERABLE),
+    /// set/clear configurable
+    HAVE_CONFIGURABLE: extern(DUK_DEFPROP_HAVE_CONFIGURABLE),
+    /// set value (given on value stack)
+    HAVE_VALUE: extern(DUK_DEFPROP_HAVE_VALUE),
+    /// set getter (given on value stack)
+    HAVE_GETTER: extern(DUK_DEFPROP_HAVE_GETTER),
+    /// set setter (given on value stack)
+    HAVE_SETTER: extern(DUK_DEFPROP_HAVE_SETTER),
+    /// force change if possible, may still fail for e.g. virtual properties
+    FORCE: extern(DUK_DEFPROP_FORCE)
+}
+
 DukContext: cover from duk_context* {
 
     raise!: func {
@@ -83,9 +106,14 @@ DukContext: cover from duk_context* {
 
     putPropString: extern(duk_put_prop_string) func (index: Int, name: CString)
     getPropString: extern(duk_get_prop_string) func (index: Int, name: CString)
+    delPropString: extern(duk_del_prop_string) func (index: Int, name: CString)
 
     putPropIndex: extern(duk_put_prop_index) func (objIndex: Int, arrIndex: Int)
     getPropIndex: extern(duk_get_prop_index) func (objIndex: Int, arrIndex: Int)
+    delPropIndex: extern(duk_del_prop_index) func (objIndex: Int, arrIndex: Int)
+
+    defProp: extern(duk_def_prop) func (objIndex: Int, flags: Int)
+    delProp: extern(duk_del_prop) func (objIndex: Int)
 
     isUndefined: extern(duk_is_undefined) func (index: Int) -> Bool
     isNull: extern(duk_is_null) func (index: Int) -> Bool
@@ -100,4 +128,3 @@ DukContext: cover from duk_context* {
     safeToString: extern(duk_safe_to_string) func (index: Int) -> CString
 
 }
-
