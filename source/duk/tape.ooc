@@ -21,6 +21,8 @@ DukException: class extends Exception {
     }
 }
 
+DUK_VARARGS: extern Int
+
 PropFlags: enum from Int {
     /// set writable (effective if DUK_DEFPROP_HAVE_WRITABLE set)
     WRITABLE: extern(DUK_DEFPROP_WRITABLE),
@@ -89,6 +91,7 @@ DukContext: cover from duk_context* {
 
     pushGlobalObject: extern(duk_push_global_object) func
     pushObject: extern(duk_push_object) func -> Int
+    pushArray: extern(duk_push_array) func -> Int
     pushString: extern(duk_push_string) func (val: CString)
     pushBoolean: extern(duk_push_boolean) func (val: Bool)
     pushCFunction: extern(duk_push_c_function) func (p: Pointer, nargs: Int)
@@ -98,6 +101,7 @@ DukContext: cover from duk_context* {
     pushInt: extern(duk_push_int) func (val: Int)
     pushNumber: extern(duk_push_number) func (val: Double)
     pushThis: extern(duk_push_this) func
+    pushNull: extern(duk_push_null) func
 
     setPrototype: extern(duk_set_prototype) func (index: Int)
 
@@ -118,12 +122,17 @@ DukContext: cover from duk_context* {
     isUndefined: extern(duk_is_undefined) func (index: Int) -> Bool
     isNull: extern(duk_is_null) func (index: Int) -> Bool
     isNullOrUndefined: extern(duk_is_null_or_undefined) func (index: Int) -> Bool
+    isNumber: extern(duk_is_number) func (index: Int) -> Bool
+    isString: extern(duk_is_string) func (index: Int) -> Bool
+    isBoolean: extern(duk_is_boolean) func (index: Int) -> Bool
 
     pop: extern(duk_pop) func
     pop2: extern(duk_pop_2) func
     pop3: extern(duk_pop_3) func
     popn: extern(duk_pop_n) func (howmany: Int)
     dup: extern(duk_dup) func (index: Int)
+
+    getTop: extern(duk_get_top) func -> Int
 
     safeToString: extern(duk_safe_to_string) func (index: Int) -> CString
 
