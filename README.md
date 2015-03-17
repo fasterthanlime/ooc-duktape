@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fasterthanlime/ooc-duktape.svg?branch=master)](https://travis-ci.org/fasterthanlime/ooc-duktape)
+
 ## duktape
 
 Bindings for the JavaScript Duktape engine.
