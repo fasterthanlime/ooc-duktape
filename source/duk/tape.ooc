@@ -49,11 +49,17 @@ PropFlags: enum from Int {
 DukContext: cover from duk_context* {
 
     raise!: func {
+        "in duk raise!" println()
+        exception!() throw()
+    }
+
+    exception!: func -> DukException {
+        "in duk exception!" println()
         getPropString(-1, "stack")
         trace := safeToString(-1) as String
         pop()
         cause := safeToString(-1) as String
-        DukException new(cause, trace) throw()
+        DukException new(cause, trace)
     }
 
     createHeapDefault: extern(duk_create_heap_default) static func -> This
@@ -135,5 +141,15 @@ DukContext: cover from duk_context* {
     getTop: extern(duk_get_top) func -> Int
 
     safeToString: extern(duk_safe_to_string) func (index: Int) -> CString
+
+    _error: extern(duk_error) func (errcode: Int, fmt: CString, ...)
+    throwError: func (msg: String) {
+        _error(0, c"%s", msg toCString())
+    }
+
+    _pushErrorObject: extern(duk_push_error_object) func (errcode: Int, fmt: CString, ...)
+    pushError: func (msg: String) {
+        _pushErrorObject(0, c"%s", msg toCString())
+    }
 
 }
