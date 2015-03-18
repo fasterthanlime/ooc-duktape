@@ -49,12 +49,10 @@ PropFlags: enum from Int {
 DukContext: cover from duk_context* {
 
     raise!: func {
-        "in duk raise!" println()
         exception!() throw()
     }
 
     exception!: func -> DukException {
-        "in duk exception!" println()
         getPropString(-1, "stack")
         trace := safeToString(-1) as String
         pop()
