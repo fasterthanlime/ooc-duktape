@@ -92,6 +92,7 @@ DukContext: cover from duk_context* {
     requireString: extern(duk_require_string) func (index: Int) -> CString
     requireBoolean: extern(duk_require_boolean) func (index: Int) -> Bool
     requireObjectCoercible: extern(duk_require_object_coercible) func (index: Int)
+    requireBuffer: extern(duk_require_buffer) func (index: Int, sizeout: SizeT*) -> UInt8*
 
     pushGlobalObject: extern(duk_push_global_object) func
     pushObject: extern(duk_push_object) func -> Int
@@ -106,6 +107,9 @@ DukContext: cover from duk_context* {
     pushNumber: extern(duk_push_number) func (val: Double)
     pushThis: extern(duk_push_this) func
     pushNull: extern(duk_push_null) func
+    pushBuffer: extern(duk_push_buffer) func (size: SizeT, dynamic: Bool) -> UInt8*
+    pushFixedBuffer: extern(duk_push_fixed_buffer) func (size: SizeT) -> UInt8*
+    pushDynamicBuffer: extern(duk_push_dynamic_buffer) func (size: SizeT) -> UInt8*
 
     setPrototype: extern(duk_set_prototype) func (index: Int)
 
@@ -129,6 +133,7 @@ DukContext: cover from duk_context* {
     isNumber: extern(duk_is_number) func (index: Int) -> Bool
     isString: extern(duk_is_string) func (index: Int) -> Bool
     isBoolean: extern(duk_is_boolean) func (index: Int) -> Bool
+    isBuffer: extern(duk_is_buffer) func (index: Int) -> Bool
 
     pop: extern(duk_pop) func
     pop2: extern(duk_pop_2) func
