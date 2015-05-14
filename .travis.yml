@@ -1,4 +1,5 @@
 before_install:
+  - sudo apt-get -y -q update
   - sudo apt-get -y -q install curl make libgc-dev
   - git clone --depth=1 git://github.com/fasterthanlime/rock.git 
   - (cd rock && make -s quick-rescue)
