@@ -1,0 +1,5 @@
+Name: duktape
+Version: 1.2.1
+Description: Bindings for Duktape JS engine (lib link)
+Additionals: ./source/duk/duktape.h, ./source/duk/duktape.c
+

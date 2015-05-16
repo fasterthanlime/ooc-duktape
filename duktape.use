@@ -1,7 +1,6 @@
 Name: duktape
-Version: 0.1
-Description: Bindings for Duktape JS engine
+Version: 1.2.1
+Description: Bindings for Duktape JS engine (ooc files)
 SourcePath: source
-Additionals: ./source/duk/duktape.h, ./source/duk/duktape.c
 Imports: duk/tape
 
