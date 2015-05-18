@@ -1,5 +1,5 @@
 
-use duktape
+use duktape, duktape-link
 import duk/tape
 
 import io/FileReader
